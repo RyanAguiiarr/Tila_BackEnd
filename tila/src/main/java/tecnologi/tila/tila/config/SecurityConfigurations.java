@@ -27,7 +27,7 @@ public class SecurityConfigurations {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers(HttpMethod.POST, "/login").permitAll();
+                    req.requestMatchers( "/auth/**").permitAll();
                     req.requestMatchers("/medicos/**").hasRole("MEDICO");
                     req.requestMatchers("/pacientes/**").hasAnyRole("MEDICO", "PACIENTE");
                     req.anyRequest().authenticated();
