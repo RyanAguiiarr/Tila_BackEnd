@@ -6,27 +6,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "pacientes")
+@Table(name = "logs_auditoria")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Paciente {
+public class LogAuditoria {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     @Column(nullable = false)
-    private String nomeCompleto;
+    private String acao;
 
-    @Column(unique = true, nullable = false)
-    private String cpf;
+    @Column(nullable = false)
+    private LocalDateTime dataHora;
 
-    private LocalDate dataNascimento;
-
-    private String telefone;
-
+    private String ipOrigem;
 }
